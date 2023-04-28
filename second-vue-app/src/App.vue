@@ -1,6 +1,7 @@
 <script setup>
 import Hello from './components/Hello.vue';
 import Next from './components/Next.vue';
+import Input from './components/Input.vue';
 
 import { ref } from 'vue';
 
@@ -9,10 +10,15 @@ const changeName = () =>{
   name.value = 'Bob';
 }
 
-const handleEvent = () => {
+const handleEvent = (newName) => {
   console.log('子コンポーネントからの通知');
-  name.value = 'Ken';
+  name.value = `${newName.firstName} ${newName.lastName}`;
 }
+
+const handleEvent2 = (newName) => {
+  console.log('子コンポーネントからの通知');
+  name.value = newName;
+};
 
 </script>
 
@@ -26,7 +32,9 @@ const handleEvent = () => {
   <br>
 
   <!-- <Next v-on:notification="handleEvent"/> -->
-  <Next @changeNameEvent="handleEvent" :name="name" />
+  <Next @changeNameEvent="handleEvent" 
+  @changeNameEvent2="handleEvent2" 
+  :name="name" />
 
 </template>
 
