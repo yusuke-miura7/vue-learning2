@@ -6,6 +6,7 @@ const props = defineProps({
     price: {type:Number, default: 500},
     message:{type: String, required: true},
     name:{type: String, default: 'John'},
+    isAdmin: Boolean,
 });
 
 // ref,reactive関数の実装
@@ -35,5 +36,7 @@ const addReactiveCount = () =>{
     <p>{{ props.message }}</p>
     <p>{{ props.name }}</p>
     <p>{{ props.price +100}}</p>
+    <p v-if="props.isAdmin">管理者です。</p>
+    <p v-else>管理者ではありません。</p>
     </div>
 </template>
