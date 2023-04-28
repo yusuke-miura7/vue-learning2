@@ -3,9 +3,11 @@ import {ref,reactive} from 'vue';
 
 // 引数の設定
 const props = defineProps({
-  message:String
-})
+  message:{type: String, required: true},
+  name:{type: String, default: 'John'},
+});
 
+// ref,reactive関数の実装
 const count = ref(0);
 const state = reactive({
     count: 1,
@@ -30,5 +32,6 @@ const addReactiveCount = () =>{
 
     <h3>props</h3>
     <p>{{ props.message }}</p>
+    <p>{{ props.name }}</p>
     </div>
 </template>
