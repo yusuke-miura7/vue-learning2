@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from 'vue';
+
 const props = defineProps({
   name: String,
 });
@@ -7,8 +8,13 @@ const props = defineProps({
 const name = ref(props.name);
 
 // scriptタグの中の関数を利用してイベントを発生する際にはdefineEmits関数を利用
-// 引数ではイベント名の設定
-const emit = defineEmits(['changeNameEvent']);
+// 引数ではイベント名の設定、オブジェクトを渡すことでバリデーションチェックも行える
+const emit = defineEmits({
+    changeNameEvent: (name) =>{
+        console.log(name);
+        return true;
+    }
+});
 
 // 複数の値を渡す
 const changeName = () => {
