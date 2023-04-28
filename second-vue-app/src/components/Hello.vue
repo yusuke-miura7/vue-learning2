@@ -3,8 +3,9 @@ import {ref,reactive} from 'vue';
 
 // 引数の設定
 const props = defineProps({
-  message:{type: String, required: true},
-  name:{type: String, default: 'John'},
+    price: {type:Number, default: 500},
+    message:{type: String, required: true},
+    name:{type: String, default: 'John'},
 });
 
 // ref,reactive関数の実装
@@ -33,5 +34,6 @@ const addReactiveCount = () =>{
     <h3>props</h3>
     <p>{{ props.message }}</p>
     <p>{{ props.name }}</p>
+    <p>{{ props.price +100}}</p>
     </div>
 </template>
