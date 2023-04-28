@@ -1,11 +1,19 @@
 <script setup>
 import Hello from './components/Hello.vue';
+import Next from './components/Next.vue';
+
 import { ref } from 'vue';
 
 const name = ref('Mike');
 const changeName = () =>{
   name.value = 'Bob';
 }
+
+const handleEvent = () => {
+  console.log('子コンポーネントからの通知');
+  name.value = 'Ken';
+}
+
 </script>
 
 <template>
@@ -15,6 +23,10 @@ const changeName = () =>{
   <br>
   <Hello message="reactiveな変数を渡す" :name="name" />
   <button @click="changeName">Change Name</button>
+  <br>
+
+  <!-- <Next v-on:notification="handleEvent"/> -->
+  <Next @changeNameEvent="handleEvent" :name="name" />
 
 </template>
 
