@@ -1,9 +1,10 @@
 <script setup>
-import { ref ,computed} from 'vue';
+import { ref ,computed ,provide} from 'vue';
 import Input from './components/Input.vue';
 import User from './components/User.vue';
 import Tokyo from './components/Tokyo.vue';
 import Kyoto from './components/Kyoto.vue';
+import CompA from './components/CompA.vue';
 
 const name = ref('John Doe');
 const address = ref('');
@@ -16,6 +17,24 @@ const tabs = {
 
 // X[Y] → オブジェクトXのプロパティ名Yとなっている値を取り出す
 const tab = computed( () => tabs[city.value]);
+
+// provide/injectの確認
+provide('message', 'Provide/Injectでデータ渡し');
+// reactiveな変数も渡してみる
+const reactive_message= ref('reactiveな変数をProvide/Injectでデータ渡し');
+provide('reactive_message',reactive_message);
+
+// オブジェクトを渡してみる
+const count = ref(0);
+const addCount = () =>{
+  count.value++;
+};
+
+provide('count',{
+  count,
+  addCount,
+});
+
 </script>
 
 <template>
@@ -78,7 +97,18 @@ const tab = computed( () => tabs[city.value]);
   <component v-bind:is="tab"></component>
 
   <!-- keep-aliveの確認、動的に切り替えても状態を保持できる -->
+  <keep-alive>
+    <component v-bind:is="tab"></component>
+  </keep-alive>
 
+  <br>
+  <br>
+
+  <!-- provide/injectの確認 直接子コンポーネントにpropsを渡せる -->
+  <CompA />
+  <br>
+  <!-- reactiveな変数も渡せることの確認 -->
+  <input v-model="reactive_message" />
 </template>
 
 <style scoped></style>

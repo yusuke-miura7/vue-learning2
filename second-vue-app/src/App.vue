@@ -1,7 +1,6 @@
 <script setup>
 import Hello from './components/Hello.vue';
 import Next from './components/Next.vue';
-import Input from './components/Input.vue';
 
 import { ref } from 'vue';
 
