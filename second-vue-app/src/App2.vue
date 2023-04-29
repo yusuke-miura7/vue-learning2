@@ -43,7 +43,10 @@ const address = ref('');
     <template #default="slotProps">
       {{ slotProps.message }}/{{ slotProps.content }}
     </template>
-  
+
+    <template v-slot:users="{ user }">
+        <li>{{ user.name }}</li>
+      </template>
   </User>
 </template>
 
