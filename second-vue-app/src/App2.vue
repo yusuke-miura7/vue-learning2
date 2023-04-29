@@ -34,6 +34,15 @@ const address = ref('');
       </div>
     </template>
     <template v-slot:actions><button>ユーザ追加</button></template>
+
+    <template v-slot:scoped="slotProps">
+      {{ slotProps.message }}
+    </template>
+    
+    <!-- v-slotは#で省略可能 -->
+    <template #default="slotProps">
+      {{ slotProps.message }}/{{ slotProps.content }}
+    </template>
   
   </User>
 </template>
