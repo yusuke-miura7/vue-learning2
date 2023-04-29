@@ -1,10 +1,21 @@
 <script setup>
-import { ref } from 'vue';
+import { ref ,computed} from 'vue';
 import Input from './components/Input.vue';
 import User from './components/User.vue';
+import Tokyo from './components/Tokyo.vue';
+import Kyoto from './components/Kyoto.vue';
 
 const name = ref('John Doe');
 const address = ref('');
+const city = ref('tokyo');
+
+const tabs = {
+  tokyo: Tokyo,
+  kyoto: Kyoto,
+}
+
+// X[Y] → オブジェクトXのプロパティ名Yとなっている値を取り出す
+const tab = computed( () => tabs[city.value]);
 </script>
 
 <template>
@@ -44,10 +55,30 @@ const address = ref('');
       {{ slotProps.message }}/{{ slotProps.content }}
     </template>
 
+    <!-- 子コンポーネントが外部から取得したpropsを表示 -->
     <template v-slot:users="{ user }">
         <li>{{ user.name }}</li>
       </template>
   </User>
+
+  <br>
+  <br>
+  <br>
+  <!-- dynamicコンポーネントの確認 -->
+  <div>
+    <button @click="city = 'tokyo'">東京</button>
+    <button @click="city = 'kyoto'">京都</button>
+  </div>
+  <div>
+    <Tokyo v-if="city =='tokyo'"/>
+    <Kyoto v-else/>
+  </div>
+
+  <!-- v-bind:isを用いたdynamicコンポーネントの作成 -->
+  <component v-bind:is="tab"></component>
+
+  <!-- keep-aliveの確認、動的に切り替えても状態を保持できる -->
+
 </template>
 
 <style scoped></style>
